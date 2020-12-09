@@ -14,7 +14,7 @@ namespace snowglobe_endpoint_func
         [FunctionName("Endpoint")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            [EventHub("telemetryEventHubxv6ty3w67q4mmns/telemetryeventhubxv6ty3w67q4mm")]IAsyncCollector<string> outputEvents,
+            //[EventHub("telemetryEventHubxv6ty3w67q4mmns/telemetryeventhubxv6ty3w67q4mm")]IAsyncCollector<string> outputEvents,
             ILogger log)
         {
             string name = req.Query["name"];
@@ -23,9 +23,9 @@ namespace snowglobe_endpoint_func
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
 
-            if (data != null) {
-              await outputEvents.AddAsync(JsonConvert.SerializeObject(data));
-            }
+            //if (data != null) {
+            //  await outputEvents.AddAsync(JsonConvert.SerializeObject(data));
+            //}
 
             string responseMessage = string.IsNullOrEmpty(name)
                 ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
