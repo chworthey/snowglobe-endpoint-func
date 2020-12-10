@@ -14,7 +14,7 @@ namespace snowglobe_endpoint_func
         [FunctionName("Endpoint")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            [EventHub("telemetryeventhubxv6ty3w67q4mm")]IAsyncCollector<string> outputEvents,
+            [EventHub("telemetryeventhub", Connection = "EventHubConnection")]IAsyncCollector<string> outputEvents,
             ILogger log)
         {
             string name = req.Query["name"];
